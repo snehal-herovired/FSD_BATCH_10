@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
-
+<!-- rgb : red,green,blue #001212  rgb(0,255,255) -->
 <body>
     <!-- iframe -->
     <!-- youtube -->
@@ -17,44 +18,51 @@
 table ,th,tr,td
 img,a,br,strong,iframe,
 -->
-<!-- form will help you to record info and send it to server -->
-<!-- singup and registration -->
-<!-- firstname,lastname,dob,email,password,picture,mobile,gender -->
+    <!-- form will help you to record info and send it to server -->
+    <!-- singup and registration -->
+    <!-- firstname,lastname,dob,email,password,picture,mobile,gender -->
     <form>
+        <h1>Regisration form</h1>
         <!-- to identify or to clarify client what should be their in pur input box -->
-     <label for="firstname">First Name</label><br>
-     <input type="text" id="firstname" placeholder="first name here"><br>
-     <label for="lastname">Last Name</label><br>
-     <input type="text" id="lastname" placeholder="last name here"><br>
-     <label for="dob">Data of Birth</label><br>
-     <input type="date" id="dob"><br>
-     <label for="email">Email</label><br>
-     <input type="email" placeholder="email here" id="email"><br>
-     <label for="password">Password</label><br>
-     <input type="password" id="password" placeholder="password here"><br>
-     <label for="file">Picture Upload</label><br>
-     <input type="file" id="file"><br>
-     <label for="number">Mobile Number</label><br>
-     <input type="number" id="number" placeholder="format +91"><br>
-     <label>Gender</label><br>
-     <!-- for radio btn keep name attribute same -->
-     <label for="male">Male</label>
-     <input type="radio" name="gender" id="male">
-     <label for="female">Female</label>
-     <input type="radio" name="gender" id="female"><br>
-     <!-- target="_blank" open the link in new window tab -->
-     <a href="https://www.github.com" target="_blank"><p>Github</p></a>
-  <!-- <input type=""> -->  
+        <label for="firstname">First Name</label><br>
+        <input type="text" id="firstname" placeholder="first name here" class="text-input"><br>
+        <label for="lastname">Last Name</label><br>
+        <input type="text" id="lastname" placeholder="last name here" class="text-input"><br>
+        <label for="dob">Data of Birth</label><br>
+        <input type="date" id="dob" class="text-input"><br>
+        <label for="email">Email</label><br>
+        <input type="email" placeholder="email here" id="email" class="text-input"><br>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" placeholder="password here" class="text-input"><br>
+        <label for="file" style="margin-bottom:2px;">Picture Upload</label><br>
+        <input type="file" id="file" style="margin-bottom:4px;margin-top:4px;"><br>
+        <label for="number">Mobile Number</label><br>
+        <input type="number" id="number" placeholder="format +91"  class="text-input"><br>
+        <label style="">Gender</label><br>
+        <!-- for radio btn keep name attribute same -->
+        <label for="male">Male</label>
+        <input type="radio" name="gender" id="male" style="margin-bottom:6px;margin-top:6px;">
+        <label for="female">Female</label>
+        <input type="radio" name="gender" id="female" style="margin-bottom:6px;margin-top:6px;"><br>
+        <!-- target="_blank" open the link in new window tab -->
+        <a href="https://www.github.com" target="_parent">
+            <p>Github</p>
+        </a>
+        <!-- <input type=""> -->
 
-   <!-- checkboxes scenario -->
-   <label for="">Terms and condition</label><br>
-   <input type="checkbox" name="temr1" id="term1">
-   <label for="term1"><p>I agree to the given policy..</p></label>
-   <input type="checkbox" name="term2" id="term2">
-   <label for=""><p>I agree to the second condition</p></label>
-     <!-- button tag -->
-     <input type="submit">
-     <button>Submit</button>
+        <!-- checkboxes scenario -->
+        <label for="">Terms and condition</label><br>
+        <input type="checkbox" name="temr1" id="term1">
+        <label for="term1">
+            I agree to the given policy..
+        </label><br>
+        <input type="checkbox" name="term2" id="term2">
+        <label for="">
+            I agree to the second condition
+        </label><br>
+        <!-- button tag -->
+        <input type="submit" class="btn-style">
+        <button class="btn-style">Submit</button>
     </form>
 </body>
 
