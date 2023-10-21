@@ -62,7 +62,7 @@
 // (
 //     ()=>{
 //         //logic space
-        
+
 //     }
 // )()
 
@@ -86,33 +86,75 @@
 // }
 // fun2()
 
-                // blocking and non-blocking
+// blocking and non-blocking
 // callbacks : synchronous and asynchronour
 
 
 console.log("start of code")
-function add(a,b){
-    let c=a+b;
+function add(a, b) {
+    let c = a + b;
     return c;
 }
 
-function calculator(a,b,calcfun){
-     return calcfun(a,b)
+function calculator(a, b, calcfun) {
+    return calcfun(a, b)
 }
 
 
-let result =calculator(2,3,add);
-console.log(result,"result from callback")
+let result = calculator(2, 3, add);
+console.log(result, "result from callback")
 
 
 // Asycnhronous callback ;
 // setTimeout(function,delay)
 // after delay ,the function will get executed.
 
-function addNumber(a,b,delay){
+//closure and lexical scope;
+function addNumber(a, b, delay) {
     setTimeout(() => {
-        let c =a+b;
+        let c = a + b;
         console.log(c);
     }, delay);
 }
-addNumber(2,3,1000)
+addNumber(2, 3, 1000);
+
+// sycnhronous code for multiplication and divsion using callback;
+
+//CALLBACK HELL
+function step1(callback) {
+    setTimeout(() => {
+        console.log("Step one executed")
+        callback();
+    }, 1000)
+}
+
+function step2(callback) {
+    setTimeout(() => {
+        console.log("Step two executed")
+        callback();
+    }, 1000)
+}
+
+function step3(callback) {
+    setTimeout(() => {
+        console.log("Step three executed")
+    callback()
+    }, 1000)
+}
+function step4() {
+    setTimeout(() => {
+        console.log("Step four executed")
+    
+    }, 1000)
+}
+
+step1(function(){
+    step2(function(){
+        step3(function(){
+            step4()
+        })
+    })
+})
+
+// ES6 : Promises
+// step 1 exceuted --> step 2---> step 3
