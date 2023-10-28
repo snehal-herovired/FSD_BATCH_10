@@ -206,8 +206,13 @@ async function fetchdata(){
 
 }
 fetchdata()
-function clickme(id){
-    console.log(id,"product id");
+async function clickme(id){
+    // const id  =parseInt(id);
+
+    const response =await fetch(`https://dummyjson.com/products/${id}`)
+    const data =await response.json();
+    console.log(data,"for single product based on ID")
+
 }
 
 // ES6
