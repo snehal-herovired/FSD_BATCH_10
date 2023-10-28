@@ -86,75 +86,131 @@
 // }
 // fun2()
 
-// blocking and non-blocking
-// callbacks : synchronous and asynchronour
+// // blocking and non-blocking
+// // callbacks : synchronous and asynchronour
 
 
-console.log("start of code")
-function add(a, b) {
-    let c = a + b;
-    return c;
-}
+// console.log("start of code")
+// function add(a, b) {
+//     let c = a + b;
+//     return c;
+// }
 
-function calculator(a, b, calcfun) {
-    return calcfun(a, b)
-}
+// function calculator(a, b, calcfun) {
+//     return calcfun(a, b)
+// }
 
 
-let result = calculator(2, 3, add);
-console.log(result, "result from callback")
+// let result = calculator(2, 3, add);
+// console.log(result, "result from callback")
 
 
 // Asycnhronous callback ;
-// setTimeout(function,delay)
-// after delay ,the function will get executed.
+// // setTimeout(function,delay)
+// // after delay ,the function will get executed.
 
-//closure and lexical scope;
-function addNumber(a, b, delay) {
-    setTimeout(() => {
-        let c = a + b;
-        console.log(c);
-    }, delay);
-}
-addNumber(2, 3, 1000);
+// //closure and lexical scope;
+// function addNumber(a, b, delay) {
+//     setTimeout(() => {
+//         let c = a + b;
+//         console.log(c);
+//     }, delay);
+// }
+// addNumber(2, 3, 1000);
 
-// sycnhronous code for multiplication and divsion using callback;
+// // sycnhronous code for multiplication and divsion using callback;
 
-//CALLBACK HELL
-function step1(callback) {
-    setTimeout(() => {
-        console.log("Step one executed")
-        callback();
-    }, 1000)
-}
+// //CALLBACK HELL
+// function step1(callback) {
+//     setTimeout(() => {
+//         console.log("Step one executed")
+//         callback();
+//     }, 1000)
+// }
 
-function step2(callback) {
-    setTimeout(() => {
-        console.log("Step two executed")
-        callback();
-    }, 1000)
-}
+// function step2(callback) {
+//     setTimeout(() => {
+//         console.log("Step two executed")
+//         callback();
+//     }, 1000)
+// }
 
-function step3(callback) {
-    setTimeout(() => {
-        console.log("Step three executed")
-    callback()
-    }, 1000)
-}
-function step4() {
-    setTimeout(() => {
-        console.log("Step four executed")
+// function step3(callback) {
+//     setTimeout(() => {
+//         console.log("Step three executed")
+//     callback()
+//     }, 1000)
+// }
+// function step4() {
+//     setTimeout(() => {
+//         console.log("Step four executed")
     
-    }, 1000)
-}
+//     }, 1000)
+// }
 
-step1(function(){
-    step2(function(){
-        step3(function(){
-            step4()
-        })
-    })
-})
+// step1(function(){
+//     step2(function(){
+//         step3(function(){
+//             step4()
+//         })
+//     })
+// })
 
 // ES6 : Promises
 // step 1 exceuted --> step 2---> step 3
+
+//pending,resolved and rejected
+//resolved and rejected.----> we handle this state.
+//Process to handle our promise functions.
+// .then((data)=>{})//resolved
+// .catch((error)=>{})//rejected state
+
+//Async-await statement , method.
+// async function fun(){
+//    LET RESULT = // await  ADD()
+//LOGIC 
+// }
+
+
+//CALLBACK --> CUSTOM PROMISE  ;
+
+async function fetchdata(){
+    const container =document.querySelector('.card-container')
+    // fetch("https://dummyjson.com/products")
+    // .then((response)=>response.json())
+    // .then((data)=>console.log(data.products))
+    // .catch((error)=>console.error(error))
+
+    const response = await fetch("https://dummyjson.com/products");
+    const data =await response.json();
+    console.log(data.products);
+    //logic looping data.products
+    // select using queryselector 
+    //let container =document.queryselector(".card-container")
+    // container.innerHTML += `
+    
+    // <div class="card-heading">${}</div>
+        // <div class="card-body">${}</div>
+    // `
+     const productArr =data.products;
+    productArr.map((ele)=>{
+        container.innerHTML =container.innerHTML + `
+        <div class="card-heading">${ele.title}</div>
+            <div class="card-body">${ele.description}</div>
+            <button onclick="clickme(${ele.id})" >Show product </button>
+        `
+        
+    })
+
+     
+
+}
+fetchdata()
+function clickme(id){
+    console.log(id,"product id");
+}
+
+// ES6
+
+// `asdasd asdasdad ${ele}
+// `
