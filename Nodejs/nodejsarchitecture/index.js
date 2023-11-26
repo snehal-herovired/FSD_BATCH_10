@@ -80,3 +80,22 @@ fs.appendFile("hero.txt",data,(err)=>{
 })
 
 // appendFileSync.
+
+//how to know a file or folder
+function isfileOrFolder(filepath){
+    fs.stat(`${filepath}`,(err,stats)=>{
+        if(err){
+            console.log(err);
+        }
+        if(stats.isFile()){
+            console.log("this is file");
+        }
+        if(stats.isDirectory()){
+            console.log("this is folder");
+        }
+    }) 
+}
+
+isfileOrFolder("./example.txt")
+isfileOrFolder("testfolder")
+
