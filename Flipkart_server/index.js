@@ -98,7 +98,7 @@ const ProductModel = mongoose.model('FlipkarProducts', ProductSchema);
 
 
 
-//User model : register and login : 
+//User model : register and login : inserting new document;
 
 app.post('/user/register', async (req, res) => {
     // registration logic 
@@ -127,6 +127,7 @@ app.post('/user/register', async (req, res) => {
 
 //authentication :validate if user exists in the db or not;
 //  Authorisation : token :
+// reading operation
 app.post('/user/login', async (req, res) => {
     // login logic
     // step 1 : take all the credential from req.body from the user.
@@ -161,7 +162,23 @@ app.post('/user/login', async (req, res) => {
     })
 })
 
+// api endpoint to update the username of user based on userid;
+// update operation , passing info using params 
 
+app.post('/user/:id',async(req,res)=>{
+    // req.params
+    const {id} =req.params; 
+    const {username} =req.body;
+    
+    //update operation of mongoose;
+    const updatedDoc =await UserModel.findByIdAndUpdate(id,{username:username},{new:true});
+
+    res.json({
+        message:"Document updated",
+        updatedDoc
+    })
+
+})
 
 
 
