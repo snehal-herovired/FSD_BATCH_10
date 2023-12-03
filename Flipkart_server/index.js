@@ -88,9 +88,11 @@ const ProductSchema = new Schema({
         type: String,
 
     },
+    
 
 
-
+},{
+    timestamps:true
 })
 
 const ProductModel = mongoose.model('FlipkarProducts', ProductSchema);
@@ -218,8 +220,8 @@ app.post('/product/update/:id', async (req, res) => {
         //details of updating the product
         const { id } = req.params
         const { productdetails, price } = req.body;
-        //id : params 
-        const updatedProduct = await ProductModel.findByIdAndUpdate(id, { productdetails:productdetails,price:price},{new:true})
+        //id : params                                              //unqiue fields
+        const updatedProduct = await ProductModel.findOneAndUpdate({_id:id}, { productdetails:productdetails,price:price},{new:true})
         res.status(201).json({
             message: "Product data Updated",
             updatedProduct
@@ -232,7 +234,35 @@ app.post('/product/update/:id', async (req, res) => {
     }
 })
 
-// api endpoint to delete product using id;
+// Make endpoint to filter the data  of product based on price;
+// see product price less than equal to 35000; GET 
+// see product price less than equal to what user is providing the price;
+// how to work with req.query
+//www.google.com/gmail?category=1000
+//$lte : less than equal to 
+//$gte: greater than equal to
+//$eq: eual to
+app.post('/product/filter',async(req,res)=>{
+     try {
+        const {price} =req.query;
+         
+        // const filteredProduct =await ProductModel.find({price:{$gte:price}});
+        // const filteredProduct =await ProductModel.find({price:{$lte:price}});
+        const filteredProduct =await ProductModel.find({price:{$eq:price}});
+        res.status(200).json({
+            filteredProduct
+        })
+     } catch (error) {
+        console.log(error.message);
+        res.status(404).json({
+            message:error.message
+        })
+     }
+
+})
+
+// Make Api endpoint to delete the product by ID ********************
+
 
 app.listen(Port, () => {
     console.log(`server is working on Port ${Port}`)
