@@ -165,23 +165,74 @@ app.post('/user/login', async (req, res) => {
 // api endpoint to update the username of user based on userid;
 // update operation , passing info using params 
 
-app.post('/user/:id',async(req,res)=>{
+app.post('/user/:id', async (req, res) => {
     // req.params
-    const {id} =req.params; 
-    const {username} =req.body;
-    
+    const { id } = req.params;
+    const { username } = req.body;
+
     //update operation of mongoose;
-    const updatedDoc =await UserModel.findByIdAndUpdate(id,{username:username},{new:true});
+    const updatedDoc = await UserModel.findByIdAndUpdate(id, { username: username }, { new: true });
 
     res.json({
-        message:"Document updated",
+        message: "Document updated",
         updatedDoc
     })
 
 })
 
+// Methods of Mongoose;
+// save(),create() ,findOne(),find(),findbyIdandUpdate();
+// take info from body and params of request object;
 
 
+//Adding new product
+app.post('/product/new', async (req, res) => {
+    //adding new product
+    try {
+        const { productname, category, productdetails, price, rating } = req.body;
+
+        const insertedProduct = await ProductModel.create({
+            productname,
+            category,
+            productdetails,
+            price,
+            rating
+        })
+
+        res.status(200).json({
+            message: "Product inserted successfully",
+            insertedProduct
+        })
+    } catch (error) {
+        console.log(error.message);
+        res.status(404).json({
+            message: error.message
+        })
+    }
+
+})
+
+// update the product detail;
+app.post('/product/update/:id', async (req, res) => {
+    try {
+        //details of updating the product
+        const { id } = req.params
+        const { productdetails, price } = req.body;
+        //id : params 
+        const updatedProduct = await ProductModel.findByIdAndUpdate(id, { productdetails:productdetails,price:price},{new:true})
+        res.status(201).json({
+            message: "Product data Updated",
+            updatedProduct
+        })
+    } catch (error) {
+        console.log(error.message);
+        res.status(404).json({
+            message: error.message
+        })
+    }
+})
+
+// api endpoint to delete product using id;
 
 app.listen(Port, () => {
     console.log(`server is working on Port ${Port}`)
