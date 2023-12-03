@@ -18,7 +18,7 @@ connectDb();
 
 
 // Problem statement for E-commerce(Flipkart);
-// Product , Userdetail, Orders, wishlists.
+// Product , Userdetail, Orders, comments;
 
 const { Schema } = mongoose;
 const UserdetailSchema = new Schema({
@@ -57,6 +57,28 @@ const UserdetailSchema = new Schema({
 })
 
 const UserModel = mongoose.model('FlipkarUsers', UserdetailSchema);
+
+//user , message
+const commentSchema =new Schema({
+    commentMsg:{
+        type:String,
+        required:true
+    },
+    userId:{
+        //referencing
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'FlipkarUsers',
+        required:true
+
+    },
+    productId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'FlipkarProducts',
+        required:true
+    }
+})
+
+const commentModel = mongoose.model('flipkartComments',commentSchema)
 
 const ProductSchema = new Schema({
     productname: {
@@ -242,13 +264,16 @@ app.post('/product/update/:id', async (req, res) => {
 //$lte : less than equal to 
 //$gte: greater than equal to
 //$eq: eual to
+
+//minPrice and maxPrice 
 app.post('/product/filter',async(req,res)=>{
      try {
-        const {price} =req.query;
+        const {minprice,maxprice} =req.query;
          
         // const filteredProduct =await ProductModel.find({price:{$gte:price}});
         // const filteredProduct =await ProductModel.find({price:{$lte:price}});
-        const filteredProduct =await ProductModel.find({price:{$eq:price}});
+        // const filteredProduct =await ProductModel.find({price:{$eq:price}});
+        const filteredProduct =await ProductModel.find({price:{$gte:minprice,$lte:maxprice}});
         res.status(200).json({
             filteredProduct
         })
@@ -263,7 +288,43 @@ app.post('/product/filter',async(req,res)=>{
 
 // Make Api endpoint to delete the product by ID ********************
 
+// api endpoints for creating comments : 
+app.post('/comment/create',async(req,res)=>{
+    //comment msg, userid,productid;
+   try {
+    const {commentMsg,userId,productId} =req.body;
 
+    const createdComment = await commentModel.create({
+        commentMsg,userId,productId
+    })
+
+    res.status(200).json({
+        message:"Comments created.",
+        createdComment
+    })
+   } catch (error) {
+    console.log(error.message,"from comment api");
+    res.status(404).json({
+        message:error.message
+    })
+   }
+})
+
+// API endpoint to get all comments;
+app.get('/comment/read',async(req,res)=>{
+    try {
+        const allComments = await commentModel.find().populate('userId').populate('productId');
+        res.status(200).json({
+            message:"all documents",
+            allComments
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(404).json({
+            message:error.message
+        })
+    }
+})
 app.listen(Port, () => {
     console.log(`server is working on Port ${Port}`)
 })
