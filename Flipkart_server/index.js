@@ -325,6 +325,9 @@ app.get('/comment/read',async(req,res)=>{
         })
     }
 })
+
+// API endpoint to update your comment using userID for the same product;***************
+//updateOne();
 app.listen(Port, () => {
     console.log(`server is working on Port ${Port}`)
 })
