@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
 const Port = 5000;
@@ -7,7 +8,7 @@ const Port = 5000;
 app.use(express.json());
 const connectDb = async () => {
     try {
-        await mongoose.connect('mongodb+srv://snehalmishra:123@cluster0.8owrboj.mongodb.net/Flipkart')
+        await mongoose.connect(process.env.Mongo_Url)
         console.log("Connected to database");
     } catch (error) {
         console.log(error.message);
@@ -51,33 +52,9 @@ app.post('/user/:id', async (req, res) => {
 
 })
 
-
+const ProductRoute =require('./routes/product.routes')
 //Adding new product
-app.post('/product/new', async (req, res) => {
-    //adding new product
-    try {
-        const { productname, category, productdetails, price, rating } = req.body;
-
-        const insertedProduct = await ProductModel.create({
-            productname,
-            category,
-            productdetails,
-            price,
-            rating
-        })
-
-        res.status(200).json({
-            message: "Product inserted successfully",
-            insertedProduct
-        })
-    } catch (error) {
-        console.log(error.message);
-        res.status(404).json({
-            message: error.message
-        })
-    }
-
-})
+app.use('/product', ProductRoute)
 
 // update the product detail;
 app.post('/product/update/:id', async (req, res) => {
@@ -206,6 +183,7 @@ app.get('/getinfo',)
 //Middleware?
 //app.use() :loader function
 //How to handle custom error handler.
+//Bcryptjs;
 //Authorization and use of JSONWEBTOKEN.
 
 //Middle ware : function or method;
@@ -217,3 +195,7 @@ app.get('/getinfo',)
 //next() : function to passs control from one middleware to another;
 
 //app.use() : mount function to load middlewares;
+
+// Authorization :process of granting permission to use resources to authenticated use.
+//  Authorization : JWT :jsonwebtoken
+  

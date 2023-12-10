@@ -1,6 +1,7 @@
 const UserModel = require('../models/userSchema.model');
 const bcryptPassword = require('../utils/bcryptPassword')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const RegisterUser = async (req, res) => {
     // registration logic 
     try {
@@ -57,8 +58,12 @@ const LoginUser = async (req, res) => {
     // }
     const ismatchedPassword = await bcrypt.compare(password, ifUser.password);
     if (ismatchedPassword) {
-      return  res.json({
-            message: `User is loggedin`
+        const token = jwt.sign({
+            data: ifUser._id
+        }, process.env.JWT_SECRETKEY, { expiresIn: '1h' });
+        return res.json({
+            message: `User is loggedin`,
+            token
         })
     }
     res.json({
