@@ -7,5 +7,7 @@ const UserRoute =express.Router();
 UserRoute.post('/register',RegisterUser);
 UserRoute.post('/login',LoginUser);
 
-
+// {
+//     "counter":3
+// }
 module.exports =UserRoute;

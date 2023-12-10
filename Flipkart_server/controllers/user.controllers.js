@@ -1,12 +1,15 @@
-const UserModel =require('../models/userSchema.model');
-
-const RegisterUser =async (req, res) => {
+const UserModel = require('../models/userSchema.model');
+const bcryptPassword = require('../utils/bcryptPassword')
+const bcrypt = require('bcryptjs')
+const RegisterUser = async (req, res) => {
     // registration logic 
     try {
         const { email, password, username } = req.body;
+        const hashedPassword = await bcryptPassword(password)
+        console.log(hashedPassword);
         const insertedData = await UserModel.create({
             email,
-            password,
+            password: hashedPassword,
             username
         })
 
@@ -25,7 +28,7 @@ const RegisterUser =async (req, res) => {
 
 }
 
-const LoginUser=async (req, res) => {
+const LoginUser = async (req, res) => {
     // login logic
     // step 1 : take all the credential from req.body from the user.
     // Step 2 : use email , to check if that user with this email is there in db;
@@ -47,19 +50,23 @@ const LoginUser=async (req, res) => {
         })
     }
 
-    if (ifUser.password == password) {
-        return res.json({
-            message: `User with ${email} has been logged in`
+    // if (ifUser.password == password) {
+    //     return res.json({
+    //         message: `User with ${email} has been logged in`
+    //     })
+    // }
+    const ismatchedPassword = await bcrypt.compare(password, ifUser.password);
+    if (ismatchedPassword) {
+      return  res.json({
+            message: `User is loggedin`
         })
     }
-
-
     res.json({
         message: `User is not able to login due to wrong password`
     })
 }
 
-module.exports={
+module.exports = {
     LoginUser,
     RegisterUser
 };

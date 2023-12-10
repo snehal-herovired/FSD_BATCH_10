@@ -31,22 +31,10 @@ const UserRoute =require('./routes/user.routes');
 // /user/register
 app.use('/user',UserRoute);
 
-
-
-
-
-
-//User model : register and login : inserting new document;
-
-
-
-//authentication :validate if user exists in the db or not;
-//  Authorisation : token :
 // reading operation
 app.post('/user/login', )
 
-// api endpoint to update the username of user based on userid;
-// update operation , passing info using params 
+
 
 app.post('/user/:id', async (req, res) => {
     // req.params
@@ -62,10 +50,6 @@ app.post('/user/:id', async (req, res) => {
     })
 
 })
-
-// Methods of Mongoose;
-// save(),create() ,findOne(),find(),findbyIdandUpdate();
-// take info from body and params of request object;
 
 
 //Adding new product
@@ -185,6 +169,13 @@ app.get('/comment/read',async(req,res)=>{
     }
 })
 
+
+app.use('*',(req,res,next)=>{
+ const error =new Error('The route does not exists.')
+ next(error);
+})
+const errorHandler= require('./utils/errorHandler')
+app.use(errorHandler);
 // API endpoint to update your comment using userID for the same product;***************
 //updateOne();
 app.listen(Port, () => {
@@ -210,3 +201,19 @@ app.get('/getinfo',)
 
 //  client --API ---server
 //          http://localhost:5000/getinfo
+
+
+//Middleware?
+//app.use() :loader function
+//How to handle custom error handler.
+//Authorization and use of JSONWEBTOKEN.
+
+//Middle ware : function or method;
+
+
+// function(req,res,next){
+//     // middleware function logic here
+// }
+//next() : function to passs control from one middleware to another;
+
+//app.use() : mount function to load middlewares;
