@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stateful Session Example</title>
+</head>
+<body>
+
+  <h1>Login</h1>
+  <form id="loginForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="rememberMe">Remember Me</label>
+    <input type="checkbox" id="rememberMe" name="rememberMe">
+
+    <button type="button" onclick="login()">Login</button>
+    <button type="button" onclick="Protected()">Protected</button>
+  </form>
+
+  <h1>Logout</h1>
+  <button onclick="logout()">Logout</button>
+
+  <script>
+    // Function to perform login with "Remember Me" functionality
+async function login() {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const rememberMe = document.getElementById('rememberMe').checked;
+
+  try {
+    const response = await fetch('/login', {
+      method: 'POST',
+      credentials:'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Credentials':'true'
+      },
+      body: JSON.stringify({ username, password, rememberMe }),
+      // credentials: 'include', // Include credentials (cookies) in the request
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    // You may want to handle the response on the frontend accordingly
+  } catch (error) {
+    console.error('Error during login:', error);
+  }
+}
+
+// Function to perform logout
+async function logout() {
+  try {
+    const response = await fetch('/logout', {
+      method: 'POST',
+      credentials: 'include', // Include credentials (cookies) in the request
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    // You may want to handle the response on the frontend accordingly
+  } catch (error) {
+    console.error('Error during logout:', error);
+  }
+}
+async function Protected() {
+  try {
+    const response = await fetch('/protected', {
+     
+      credentials: 'include', // Include credentials (cookies) in the request
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    // You may want to handle the response on the frontend accordingly
+  } catch (error) {
+    console.error('Error during logout:', error);
+  }
+}
+
+  </script>
+</body>
+</html>

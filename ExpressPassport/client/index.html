@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+   <button onclick="login()">GLogin</button>
+   
+   <button onclick="logout()">GLogout</button>
+    <script>
+function login(){
+    window.open('http://localhost:3000/auth/google',"_self")
+}
+async function logout() {
+    try {
+                window.open('http://localhost:3000/auth/logout',"_self")
+                
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+
+    </script>
+</body>
+</html>
