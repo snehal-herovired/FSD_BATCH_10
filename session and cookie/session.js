@@ -1,3 +1,4 @@
+// Learning session and cookies :
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
@@ -7,6 +8,8 @@ require('dotenv').config();
 const app = express();
 
 app.use(express.json());
+
+
 const viewDirectory =path.join(__dirname,"views");
 app.use(express.static(viewDirectory));
 app.use(session({
@@ -28,6 +31,41 @@ app.use(session({
     })
 }))
 
+function isAuthenticated(req, res, next) {
+    // we will check if session has userid;
+    // we will pass control to next middleware;
+    req.session.userid ? next() : res.json({message:'you are not authenticated'})
+}
+
+
+//protected api
+app.get('/info', isAuthenticated, (req, res) => {
+    res.json({message:'session class'})
+})
+
+
+
+app.post('/login', (req, res) => {
+    //authentication logic
+      console.log(req.body)
+    //the moment user entered password matches the db password
+    req.session.userid = '1234'
+
+    res.json({message:'hi you are logged in'})
+})
+
+
+app.get('/logout',isAuthenticated,(req,res)=>{
+    req.session.destroy();
+    res.json({message:'you are logged out'})
+})
+
+
+
 app.listen(5000, () => {
     console.log("server running on Port 5000");
 })
+
+
+
+
