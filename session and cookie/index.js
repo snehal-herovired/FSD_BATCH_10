@@ -8,6 +8,7 @@ const passport =require('passport')
 const app = express();
 
 app.use(express.json());
+
 const viewDirectory =path.join(__dirname,"views");
 app.use(express.static(viewDirectory));
 app.use(session({
@@ -27,6 +28,19 @@ app.use(session({
 }))
 
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+function ensureAuthenticated(req,res,next){
+    if(req.isAuthenticated()){
+       return next()
+    }
+    res.redirect('/login.html')
+}
+
+app.get('/mainPage',ensureAuthenticated,(req,res)=>{
+    res.json({message:`Hi ${req.user.displayName}`})
+})
 const GoogleRoutes =require('./passportGoogle');
 app.use('/auth',GoogleRoutes);
 

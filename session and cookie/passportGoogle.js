@@ -40,7 +40,8 @@ GoogleRoutes.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login.html' }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/dashboard.html');
+    // res.redirect('/dashboard.html');
+    res.redirect('/dashboard.html')
   });
 
 
@@ -50,7 +51,7 @@ GoogleRoutes.get('/logout', (req, res, next) => {
       console.log(err);
       return next(err);
     }
-    res.redirect('/')
+    res.redirect('/login.html')
   })
 })
 
@@ -58,7 +59,7 @@ passport.serializeUser((user, done) => {
   // serialize is used from determining which data of the user should be store in the session
   //  user.id =profile.id
 
-  done(null, user.id)
+  done(null, user)
 
 
 })
