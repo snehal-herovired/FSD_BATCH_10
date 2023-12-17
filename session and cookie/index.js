@@ -4,6 +4,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const path =require('path');
 require('dotenv').config();
+const passport =require('passport')
 const app = express();
 
 app.use(express.json());
@@ -19,15 +20,16 @@ app.use(session({
         //  secure: true  : only when u are working with https
         httpOnly: true,   // it XSS attacks;
         maxAge: 1000 * 60 * 60 * 24
-
-
-
     },
     store: MongoStore.create({
         mongoUrl: process.env.SESSION_MONGO_URL
     })
 }))
 
-app.listen(5000, () => {
-    console.log("server running on Port 5000");
+
+const GoogleRoutes =require('./passportGoogle');
+app.use('/auth',GoogleRoutes);
+
+app.listen(3000, () => {
+    console.log("server running on Port 3000");
 })
