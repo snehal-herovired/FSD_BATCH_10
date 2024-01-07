@@ -1,9 +1,7 @@
 import './App.css';
 import "./registration.css"
-import Header from './components/Header';
-import Subheader from './components/Subheader';
-import Body from './components/Body';
-import FashionOpt from './components/FashionOpt';
+import HomePage from './pages/HomePage';
+import {BrowserRouter ,Routes,Route}  from "react-router-dom"
 function App() {
   // let styleobj={
   //   backgroundColor:"red",
@@ -12,13 +10,15 @@ function App() {
   // username,email and password  and button;
   // inline style;
   return(
-    <>
-     <Header/>
-     <Subheader/>
-     <Body/>
+    <BrowserRouter>
+    <Routes>
+      <Route element={<HomePage/>} path="/home" />
+    </Routes>
+     
+
      {/* <FashionOpt/> */}
     
-    </>
+    </BrowserRouter>
   )
 }
 
