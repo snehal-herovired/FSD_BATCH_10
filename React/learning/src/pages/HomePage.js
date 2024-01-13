@@ -7,7 +7,7 @@ export default function HomePage() {
     <>
     <Header/>
     <Subheader/>
-    <Body/>
+    {/* <Body/> */}
     </>
   )
 }
