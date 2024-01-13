@@ -2,6 +2,9 @@ import './App.css';
 import "./registration.css"
 import HomePage from './pages/HomePage';
 import {BrowserRouter ,Routes,Route}  from "react-router-dom"
+
+//How component talk to each other.(props)
+//How component update each other and themselves.
 function App() {
   // let styleobj={
   //   backgroundColor:"red",
@@ -14,7 +17,7 @@ function App() {
     <Routes>
       <Route element={<HomePage/>} path="/home" />
     </Routes>
-     
+     {/* <img src='/images/'/> */}
 
      {/* <FashionOpt/> */}
     
