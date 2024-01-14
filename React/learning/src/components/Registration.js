@@ -1,12 +1,15 @@
 import React,{useState}from 'react'
-
+import { Link ,useNavigate} from 'react-router-dom';
 export default function Registration() {
-  
-  const[data,setData]=useState({})
+  const navigate =useNavigate();
+  const[data,setData]=useState({
+    username:'',
+    email:'',
+    password:''
+  });
+  const[userdetails,setUserDetails]=useState([])
  
 
-const a ={id:1,age:12}
-console.log({...a});
   // dynamic data manipulation
   
 function handleChange(event){
@@ -21,12 +24,45 @@ setData((prev)=>(
 
 console.log(data,"my data");
 
+function handleSubmit(){
+  //single data, somehow array store
+
+  //filter,map,reduce,find,includes
+  setUserDetails((prev)=>(
+    [
+      ...prev,
+      data
+    
+    ]
+  ))
+  // try to empty the input fields
+  setData({
+    username:'',
+    email:'',
+    password:''
+  })
+}
+
+console.log(userdetails,"userdetails");
+
+function samplefun(){
+//
+const a=false
+if(a){
+  navigate('/home')
+}else{
+
+  navigate('/')
+}
+}
   return (
     <div>
-     <input placeholder='username'name='username' onChange={handleChange}/>
-     <input placeholder='email' name='email'onChange={handleChange}/>
-     <input placeholder='password' name='password' onChange={handleChange}/>
-      <button>Register</button>
+     <input placeholder='username'name='username' onChange={handleChange} value={data.username}/>
+     <input placeholder='email' name='email'onChange={handleChange} value={data.email}/>
+     <input placeholder='password' name='password' onChange={handleChange} value={data.password}/>
+      <button onClick={handleSubmit}>Submit Again</button>
+      {/* <Link to='/home' style={{textDecoration:'none'}}>Go to Homepage</Link> */}
+      <button onClick={samplefun}>Homepage</button>
     </div>
   )
 }

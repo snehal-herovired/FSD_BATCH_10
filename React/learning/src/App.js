@@ -17,6 +17,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route element={<Registration/>} path="/" />
+      <Route element={<HomePage/>} path='/home'/>
     </Routes>
      {/* <img src='/images/'/> */}
 
