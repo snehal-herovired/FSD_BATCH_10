@@ -1,0 +1,21 @@
+1. What is react?
+2. Why we are using react ?
+3.What is JSX?
+4.What is Component?
+5.Types of Component?
+6.What is functional Component and why react prefers it ?
+8.How to use js inside return statement of functional Component?
+9.How to use conditional statement inside of return statement of functional Component?
+10.What is props?
+11. how the props is passed?
+12.How do we enable style attritube in jsx?
+13.Why we prefer className instead of Class in react?
+14.How public folder is helping with images here in our Component?
+15.How to create mockdata and use it anywhere in Component?
+16.How to map a data and render a single Component multiple times based on Data?
+17.what is the use react-router-dom?
+18.How to enable routing in a Component?
+19.What is hooks?
+20.What is useState ?
+21.How we can use statefunction from Component to another?
+22.Example: toggles,modal opening, setting up of string value 

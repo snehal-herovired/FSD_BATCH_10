@@ -2,6 +2,7 @@ import './App.css';
 import "./registration.css"
 import HomePage from './pages/HomePage';
 import {BrowserRouter ,Routes,Route}  from "react-router-dom"
+import Registration from './components/Registration';
 
 //How component talk to each other.(props)
 //How component update each other and themselves.
@@ -15,7 +16,7 @@ function App() {
   return(
     <BrowserRouter>
     <Routes>
-      <Route element={<HomePage/>} path="/home" />
+      <Route element={<Registration/>} path="/" />
     </Routes>
      {/* <img src='/images/'/> */}
 

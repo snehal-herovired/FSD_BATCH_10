@@ -23,6 +23,10 @@ export default function Header() {
 // Mode : Dark and Light
 //Opening of Modal.
 
+// Assignment of the Day :
+// Implement light and dark mode in the E-commerce project and also integrate
+// login and register modal in the same and push the code on github.
+
   return (
     <>
     
