@@ -1,12 +1,13 @@
 import React,{useState} from 'react'
 import '../styles/header.css'
 import Registration from './Registration'
-export default function Header() {
+export default function Header({data}) {
   // snehal
   //hooks :they are special function provided in functional component.
   //useState hook. : it helps us to maitain the initial and changed state of component.
   //     statevariable,stateFuntion
   // const [name,setName]=useState('Login') // intialstate store in statevaraible.
+  console.log("Hi I am inside Header component and i am rendering")
   const [toggle,setToggle]=useState(false)
 
   function OpenModal(){
@@ -32,7 +33,7 @@ export default function Header() {
     
     <div style={{}}>
       <h4 onClick={OpenModal}>
-        Login
+        This is Header :{data.username}
       </h4>
     </div>
 

@@ -1,49 +1,39 @@
 import React,{useState}from 'react'
 import { Link ,useNavigate} from 'react-router-dom';
-export default function Registration() {
+import Header from './Header';
+import InsideRegister from './InsideRegister';
+export default function Registration({setData,data}) {
+  console.log("Hi I am  register component and i am rendering")
   const navigate =useNavigate();
-  const[data,setData]=useState({
-    username:'',
-    email:'',
-    password:''
-  });
-  const[userdetails,setUserDetails]=useState([])
+
+  // const[userdetails,setUserDetails]=useState([])
  
 
   // dynamic data manipulation
   
-function handleChange(event){
-console.log(event.target.name ,event.target.value);
-setData((prev)=>(
-  {
-  ...prev,
-    [event.target.name]:event.target.value
-  }
-))
-}
 
-console.log(data,"my data");
+// console.log(data,"my data");
 
-function handleSubmit(){
-  //single data, somehow array store
+// function handleSubmit(){
+//   //single data, somehow array store
 
-  //filter,map,reduce,find,includes
-  setUserDetails((prev)=>(
-    [
-      ...prev,
-      data
+//   //filter,map,reduce,find,includes
+//   setUserDetails((prev)=>(
+//     [
+//       ...prev,
+//       data
     
-    ]
-  ))
-  // try to empty the input fields
-  setData({
-    username:'',
-    email:'',
-    password:''
-  })
-}
+//     ]
+//   ))
+//   // try to empty the input fields
+//   setData({
+//     username:'',
+//     email:'',
+//     password:''
+//   })
+// }
 
-console.log(userdetails,"userdetails");
+// console.log(userdetails,"userdetails");
 
 function samplefun(){
 //
@@ -57,10 +47,8 @@ if(a){
 }
   return (
     <div>
-     <input placeholder='username'name='username' onChange={handleChange} value={data.username}/>
-     <input placeholder='email' name='email'onChange={handleChange} value={data.email}/>
-     <input placeholder='password' name='password' onChange={handleChange} value={data.password}/>
-      <button onClick={handleSubmit}>Submit Again</button>
+      
+      <InsideRegister  setData={setData} data={data}/>
       {/* <Link to='/home' style={{textDecoration:'none'}}>Go to Homepage</Link> */}
       <button onClick={samplefun}>Homepage</button>
     </div>

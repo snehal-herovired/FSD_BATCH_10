@@ -18,4 +18,7 @@
 19.What is hooks?
 20.What is useState ?
 21.How we can use statefunction from Component to another?
-22.Example: toggles,modal opening, setting up of string value 
+22.Example: toggles,modal opening, setting up of string value.
+23.useState : how to handle objects and arrays (array of object.)
+24.Navigate from react-router-dom library. (conditional routing ).
+25.Links from react-router-dom library.
