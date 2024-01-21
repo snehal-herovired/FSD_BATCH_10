@@ -2,9 +2,9 @@ import axios from 'axios'
 import React, { useEffect ,useState} from 'react'
 import Card from './Card'
 
-export default function ProductComp({id}) {
+export default function ProductComp({id,setEnablebtn,enablebtn}) {
    const [singledata,setSingleData]=useState({})
-   const [enablebtn,setEnablebtn] =useState(true)
+   
 
   useEffect(()=>{
    const fetchdata =async()=>{

@@ -8,6 +8,7 @@ import Login from './Pages/Login';
 import { useState } from 'react';
 function App() {
   const [enableHeader, setEnableHeader] = useState(false)
+  const [enablebtn,setEnablebtn] =useState(true)
   return (
     <>
 
@@ -15,8 +16,8 @@ function App() {
         enableHeader && <Header />
       }
       <Routes>
-        <Route element={<HomePage />} path='/home' />
-        <Route element={<ProductDetails />} path='/product/:id' />
+        <Route element={<HomePage setEnablebtn={setEnablebtn} enablebtn={enablebtn}/>} path='/home' />
+        <Route element={<ProductDetails setEnablebtn={setEnablebtn} enablebtn={enablebtn}/>} path='/product/:id' />
         <Route element={<Login setEnableHeader={setEnableHeader} />} path='/' />
       </Routes>
     </>
