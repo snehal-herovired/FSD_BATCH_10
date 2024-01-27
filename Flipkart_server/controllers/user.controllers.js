@@ -38,7 +38,7 @@ const LoginUser = async (req, res) => {
     // Step 5 : if user is not there; "no user found !","Please register with us"
     const { email, username, password } = req.body;
     if (!email || !username || !password) {
-        return res.json({
+        return res.status(201).json({
             message: "Please enter all your credentails"
         })
     }
@@ -46,8 +46,8 @@ const LoginUser = async (req, res) => {
     const ifUser = await UserModel.findOne({ email: email });
 
     if (!ifUser) {
-        return res.json({
-            message: `User with this ${email} is not found !`
+        return res.status(202).json({
+            message: `User with this ${email} is not found !Please register.`
         })
     }
 
@@ -66,7 +66,7 @@ const LoginUser = async (req, res) => {
             token
         })
     }
-    res.json({
+    res.status(203).json({
         message: `User is not able to login due to wrong password`
     })
 }

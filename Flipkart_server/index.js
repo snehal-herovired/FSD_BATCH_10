@@ -1,11 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors =require('cors')
 require('dotenv').config();
 
 const app = express();
 const Port = 5000;
 
 app.use(express.json());
+app.use(cors())
 const connectDb = async () => {
     try {
         await mongoose.connect(process.env.Mongo_Url)
@@ -30,7 +32,7 @@ const UserRoute =require('./routes/user.routes');
 //in order to user any kind of custom route or any external middleware 
 // we use app.use() : loader method
 // /user/register
-app.use('/user',UserRoute);
+app.use('/user',UserRoute);    
 
 // reading operation
 app.post('/user/login', )
