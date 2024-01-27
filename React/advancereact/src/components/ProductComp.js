@@ -1,9 +1,14 @@
 import axios from 'axios'
-import React, { useEffect ,useState} from 'react'
+import React, { useEffect ,useState,useContext} from 'react'
 import Card from './Card'
+// import UserContext from '../contexts/UserContext'
+import ProductContext from '../contexts/ProductContext'
 
-export default function ProductComp({id,setEnablebtn,enablebtn}) {
+
+export default function ProductComp({id}) {
    const [singledata,setSingleData]=useState({})
+   const ctx =useContext(ProductContext);
+   console.log(ctx);
    
 
   useEffect(()=>{
@@ -11,7 +16,7 @@ export default function ProductComp({id,setEnablebtn,enablebtn}) {
     const response =await axios.get(`https://dummyjson.com/products/${id}`)
     console.log(response.data);
     setSingleData(response.data);
-    setEnablebtn(false)
+    ctx.setEnablebtn(false)
    }
    fetchdata()
   },[])
@@ -25,7 +30,7 @@ export default function ProductComp({id,setEnablebtn,enablebtn}) {
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div> */}
-  <Card element={singledata} enablebtn={enablebtn}/>
+  <Card element={singledata} enablebtn={ctx.enablebtn} />
     
     </>
   )

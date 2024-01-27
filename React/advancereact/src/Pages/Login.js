@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import axios from "axios"
 import API from '../connection/connection';
-import { useNavigate } from 'react-router-dom'
-export default function Login({setEnableHeader}) {
+import { useNavigate } from 'react-router-dom';
+import UserContext from '../contexts/UserContext';
+import HeaderContext from '../contexts/HeaderContext';
+export default function Login() {
+ const ctx =useContext(UserContext);
+ const hctx =useContext(HeaderContext);
+ console.log(ctx);
   const [data, setData] = useState({
     email:'',
     username:'',
@@ -48,8 +53,10 @@ export default function Login({setEnableHeader}) {
     const response =await axios.post(`${API}/user/login`,data)
     console.log(response,"log from try block");
     if(response.status===200){
+      hctx.setUsername(data.username)
       navigate('/home')
-      setEnableHeader(true)
+       ctx.setEnableHeader(true)
+       ctx.setLogin(true)
     }else{
       setShowError(true)
       setErrorMsg(response.data.message)

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Card({element,enablebtn}) {
     const navigate =useNavigate()
-    console.log(enablebtn,"value for this");
+    // console.log(enablebtn,"value for this");
   return (
     <div class="card" style={{width: "18rem"}}>
         <img src={element.thumbnail} class="card-img-top" alt="..."/>

@@ -1,9 +1,12 @@
 import axios from 'axios'
-import React ,{useEffect,useState}from 'react'
+import React ,{useEffect,useState,useContext}from 'react'
 import { useNavigate } from 'react-router-dom'
 import Card from './Card'
-export default function Body({setEnablebtn,enablebtn}) {
- 
+// import UserContext from '../contexts/UserContext'
+import ProductContext from '../contexts/ProductContext'
+export default function Body() {
+ const ctx =useContext(ProductContext);
+ console.log(ctx,"from body");
   const [storeApidata,setStoreApiData] =useState([])
 
 
@@ -12,7 +15,7 @@ export default function Body({setEnablebtn,enablebtn}) {
     const response =await axios.get("https://dummyjson.com/products")
     // console.log(response.data.products);
     setStoreApiData(response.data.products)
-    setEnablebtn(true)
+     ctx.setEnablebtn(true)
   }
   fetchdata()
   },[])
@@ -21,7 +24,7 @@ export default function Body({setEnablebtn,enablebtn}) {
      {
        storeApidata.length>0 ? 
        storeApidata.map((element,index)=>(
-       <Card element={element} key={index} enablebtn={enablebtn} />
+       <Card element={element} key={index}  enablebtn={ctx.enablebtn}/>
 
        ))
        :

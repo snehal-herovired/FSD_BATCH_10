@@ -1,11 +1,13 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { Link } from 'react-router-dom'
+import HeaderContext from '../contexts/HeaderContext'
 
 export default function Header() {
+  const hctx =useContext(HeaderContext)
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <div className="container-fluid">
-    <Link className="navbar-brand" to="/home">Home</Link>
+    <Link className="navbar-brand" to="/home">Home :{hctx.username}</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
