@@ -1,13 +1,21 @@
 import React,{useContext} from 'react'
-import { Link } from 'react-router-dom'
+import { Link ,useNavigate} from 'react-router-dom'
 import HeaderContext from '../contexts/HeaderContext'
+import UserContext from '../contexts/UserContext'
 
 export default function Header() {
+  const navigate =useNavigate()
   const hctx =useContext(HeaderContext)
+  const ctx =useContext(UserContext)
+
+  function handleLogout(){
+    ctx.setLogin(false);
+    navigate('/')
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <div className="container-fluid">
-    <Link className="navbar-brand" to="/home">Home :{hctx.username}</Link>
+    <Link className="navbar-brand" to="/home">Home</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -16,9 +24,19 @@ export default function Header() {
         <li className="nav-item">
           <Link className="nav-link active" aria-current="page" to="/product">ProductPage</Link>
         </li>
+       {
+        ctx.login 
+        ? 
         <li className="nav-item">
-          <a className="nav-link" href="#">Link</a>
-        </li>
+        <button onClick={handleLogout}>Logout</button>
+      </li>
+      :
+      <li className="nav-item">
+      <button onClick={()=>navigate('/')}>Login</button>
+    </li>
+
+       }
+      
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown

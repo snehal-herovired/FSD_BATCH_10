@@ -53,6 +53,8 @@ export default function Login() {
     const response =await axios.post(`${API}/user/login`,data)
     console.log(response,"log from try block");
     if(response.status===200){
+      localStorage.setItem("token",response.data.token)
+      localStorage.setItem("login","true");
       hctx.setUsername(data.username)
       navigate('/home')
        ctx.setEnableHeader(true)
