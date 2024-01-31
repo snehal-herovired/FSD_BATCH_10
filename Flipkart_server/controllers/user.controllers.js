@@ -13,7 +13,7 @@ const RegisterUser = async (req, res) => {
             password: hashedPassword,
             username
         })
-
+       console.log(insertedData);
         res.json({
             message: "data inserted successfully",
             insertedData
@@ -21,8 +21,8 @@ const RegisterUser = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message);
-        res.json({
+        console.log(error.message ,"error msg");
+        res.status(404).json({
             message: error.message
         })
     }
